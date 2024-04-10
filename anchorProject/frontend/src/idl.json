@@ -1,0 +1,140 @@
+{
+  "version": "0.1.0",
+  "name": "voting_system",
+  "instructions": [
+    {
+      "name": "initialize",
+      "accounts": [
+        {
+          "name": "voteAccount",
+          "isMut": true,
+          "isSigner": true,
+          "docs": [
+            "We mark vote_account with the init attribute, which creates a new account owned by the program",
+            "When using init, we must also provide:",
+            "payer, which funds the account creation",
+            "space, which defines how large the account should be",
+            "and the system_program which is required by the runtime",
+            "This enforces that our vote_account be owned by the currently executing program, and that it should be deserialized to the VoteAccount struct below at #[account]"
+          ]
+        },
+        {
+          "name": "user",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "initValue",
+          "type": "u128"
+        }
+      ]
+    },
+    {
+      "name": "voteCrunchy",
+      "docs": [
+        "Allow account validation logic is handled below at the #[account(...)] macros, letting us just focus on the business logic"
+      ],
+      "accounts": [
+        {
+          "name": "voteAccount",
+          "isMut": true,
+          "isSigner": false,
+          "docs": [
+            "Marking accounts as mut persists any changes made upon exiting the program, allowing our votes to be recorded"
+          ]
+        }
+      ],
+      "args": [
+        {
+          "name": "voteValue",
+          "type": "u128"
+        }
+      ]
+    },
+    {
+      "name": "voteSmooth",
+      "accounts": [
+        {
+          "name": "voteAccount",
+          "isMut": true,
+          "isSigner": false,
+          "docs": [
+            "Marking accounts as mut persists any changes made upon exiting the program, allowing our votes to be recorded"
+          ]
+        }
+      ],
+      "args": [
+        {
+          "name": "voteValue",
+          "type": "u128"
+        }
+      ]
+    },
+    {
+      "name": "publishResult",
+      "accounts": [
+        {
+          "name": "voteAccount",
+          "isMut": true,
+          "isSigner": false,
+          "docs": [
+            "Marking accounts as mut persists any changes made upon exiting the program, allowing our votes to be recorded"
+          ]
+        },
+        {
+          "name": "user",
+          "isMut": true,
+          "isSigner": true
+        }
+      ],
+      "args": [
+        {
+          "name": "crunchyresult",
+          "type": "u128"
+        },
+        {
+          "name": "smoothresult",
+          "type": "u128"
+        }
+      ]
+    }
+  ],
+  "accounts": [
+    {
+      "name": "VoteAccount",
+      "docs": [
+        "Here we define what our VoteAccount looks like",
+        "We define a struct with two public properties: crunchy and smooth",
+        "These properties will keep track of their respective votes as unsigned 64-bit integers",
+        "This VoteAccount will be passed inside each Transaction Instruction to record votes as they occur"
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "crunchy",
+            "type": "u128"
+          },
+          {
+            "name": "smooth",
+            "type": "u128"
+          },
+          {
+            "name": "admin",
+            "type": "publicKey"
+          }
+        ]
+      }
+    }
+  ],
+  "metadata": {
+    "address": "qdgqhajmT3X3eckTpbXJxTY2aG2ykERjkwoRejZ7hZF"
+  }
+}
