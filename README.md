@@ -2,7 +2,7 @@
 A system that enables confidential voting on solana blockchain using FHE enabled by zkVM and identity Verification of the voter to avoid fake voting
 ## Architecture Diagram
 
-![Architecture Diagram]()
+![Architecture Diagram](https://github.com/adirola/EnigmaVote/blob/main/staticAssets/architecture.png)
 
 > FHE based privacy enabling solution for Solana Blockchain (ZK + FHE + MPC)
 
